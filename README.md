@@ -150,7 +150,44 @@ This project is licensed under the MIT License.
 - [ ] Add user authentication
 - [ ] Implement file upload functionality
 - [ ] Add search and filtering
-- [ ] Deploy to Azure App Service
+- [x] Deploy to Azure App Service
 - [ ] Add unit tests
 - [ ] Implement caching with Azure Redis
+
+## 🚀 Azure Deployment
+
+This application is ready for deployment to Azure App Service! 
+
+### Quick Deployment
+```powershell
+# From the project root directory
+.\deployment\deploy.ps1
+```
+
+### Manual Deployment
+See [DEPLOYMENT.md](./DEPLOYMENT.md) for detailed deployment instructions.
+
+### Deployment Features
+- ✅ ARM template for infrastructure as code
+- ✅ PowerShell deployment script
+- ✅ GitHub Actions CI/CD pipeline
+- ✅ Environment-specific configuration
+- ✅ Production-ready builds
+- ✅ Azure App Service optimization
+
+The deployment creates:
+- Azure App Service Plan
+- Backend App Service (Node.js API)
+- Frontend App Service (React SPA)
+- Automatic environment configuration
+
+## 📋 Deployment Files
+
+| File | Purpose |
+|------|---------|
+| `azure-template.json` | ARM template for Azure resources |
+| `deployment/deploy.ps1` | PowerShell deployment script |
+| `.github/workflows/azure-deploy.yml` | GitHub Actions CI/CD |
+| `DEPLOYMENT.md` | Detailed deployment guide |
+
 Azure CRUD application built with AI agent assistance
