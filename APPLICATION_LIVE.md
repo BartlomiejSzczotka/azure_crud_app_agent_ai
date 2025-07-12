@@ -1,24 +1,39 @@
-# 🔧 FIXING FRONTEND - ATTEMPT #3 (PORT FIX)
+# 🔧 FIXING FRONTEND - ATTEMPT #4 (EXPRESS DEPENDENCY)
 
 ## 🚨 Current Status: 
-**Frontend port configuration fixed - container was failing on port 8080**
+**Express dependency missing - server cannot start due to MODULE_NOT_FOUND**
 
-## 🛠️ New Fix Applied:
-- **Root Cause**: Express server was listening on port 3000, Azure expects 8080
-- **Fix**: Changed `process.env.PORT || 3000` to `process.env.PORT || 8080`  
-- **Additional Fix**: Added binding to `0.0.0.0` for proper container networking
-- **Status**: GitHub Actions deployment in progress
-
-### 🔍 What We Found in Azure Logs:
+## 🛠️ Root Cause Found:
 ```
-ERROR - Container didn't respond to HTTP pings on port: 8080
-ERROR - Container has exited, failing site start
+Error: Cannot find module 'express'
+Require stack:
+- /home/site/wwwroot/server.js
 ```
 
-### 🎯 Solution Applied:
-1. ❌ **Previous**: `const port = process.env.PORT || 3000`
-2. ✅ **New**: `const port = process.env.PORT || 8080`  
-3. 🔧 **Additional**: `app.listen(port, "0.0.0.0", ...)`
+## 🎯 Fix Applied:
+- **Issue**: GitHub Actions created package.json with express dependency but didn't install it
+- **Solution**: Added `npm install --production` step before deployment
+- **Workflow**: package.json → npm install → deploy
+- **Status**: New deployment starting...
+
+### 🔍 What We Found in Container Logs:
+- ✅ Azure App Service started correctly
+- ✅ Node.js 22.15.0 running  
+- ✅ Port 8080 configuration working
+- ❌ Express module not found during require()
+
+### 🛠️ Technical Fix:
+```yaml
+- name: Install production dependencies
+  run: |
+    cd frontend/build
+    npm install --production
+```
+
+### ⏳ Current Status:
+- **Deployment**: 🔄 GitHub Actions running
+- **ETA**: ~2-3 minutes
+- **Next**: Container should start Express server successfully
 
 ### 🌐 Application URLs:
 - **Frontend (Being Fixed)**: https://azure-crud-frontend-app.azurewebsites.net ⚠️

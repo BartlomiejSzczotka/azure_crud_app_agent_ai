@@ -1,7 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
-const API_BASE_URL = process.env.REACT_APP_API_URL || '/api';
+// Set API URL based on environment
+const API_BASE_URL = process.env.NODE_ENV === 'production' 
+  ? 'https://azure-crud-backend-app.azurewebsites.net/api'
+  : process.env.REACT_APP_API_URL || '/api';
 
 function App() {
   const [products, setProducts] = useState([]);
@@ -20,6 +23,7 @@ function App() {
 
   // Fetch products on component mount
   useEffect(() => {
+    console.log('API_BASE_URL:', API_BASE_URL);
     fetchProducts();
   }, []);
 
@@ -27,11 +31,15 @@ function App() {
     try {
       setLoading(true);
       const response = await axios.get(`${API_BASE_URL}/products`);
-      setProducts(response.data.data);
+      // Ensure we always set an array
+      const productsData = response.data?.data || response.data || [];
+      setProducts(Array.isArray(productsData) ? productsData : []);
       setError('');
     } catch (err) {
       setError('Failed to fetch products');
       console.error('Error fetching products:', err);
+      // Ensure products is always an array
+      setProducts([]);
     } finally {
       setLoading(false);
     }
