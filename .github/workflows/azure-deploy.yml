@@ -10,7 +10,7 @@ env:
   AZURE_WEBAPP_NAME_FRONTEND: azure-crud-frontend-app
   AZURE_WEBAPP_PACKAGE_PATH_BACKEND: 'backend'
   AZURE_WEBAPP_PACKAGE_PATH_FRONTEND: 'frontend'
-  NODE_VERSION: '18.x'
+  NODE_VERSION: '22.x'
 
 jobs:
   build-and-deploy-backend:
@@ -22,13 +22,11 @@ jobs:
       uses: actions/setup-node@v4
       with:
         node-version: ${{ env.NODE_VERSION }}
-        cache: 'npm'
-        cache-dependency-path: backend/package-lock.json
 
     - name: Install dependencies
       run: |
         cd backend
-        npm ci
+        npm install --production
 
     - name: Deploy to Azure Web App (Backend)
       id: deploy-to-webapp-backend
@@ -48,13 +46,11 @@ jobs:
       uses: actions/setup-node@v4
       with:
         node-version: ${{ env.NODE_VERSION }}
-        cache: 'npm'
-        cache-dependency-path: frontend/package-lock.json
 
     - name: Install dependencies and build
       run: |
         cd frontend
-        npm ci
+        npm install
         npm run build
 
     - name: Deploy to Azure Web App (Frontend)
