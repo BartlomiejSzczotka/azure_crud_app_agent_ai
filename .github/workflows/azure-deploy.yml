@@ -83,6 +83,11 @@ jobs:
           console.log(`Frontend server running on port ${port}`);
         });' > server.js
 
+    - name: Install production dependencies
+      run: |
+        cd frontend/build
+        npm install --production
+
     - name: Deploy to Azure Web App (Frontend)
       id: deploy-to-webapp-frontend
       uses: azure/webapps-deploy@v2

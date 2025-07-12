@@ -1,13 +1,24 @@
-# 🔧 FIXING FRONTEND - ATTEMPT #2
+# 🔧 FIXING FRONTEND - ATTEMPT #3 (PORT FIX)
 
 ## 🚨 Current Status: 
-**Frontend showing "Application Error" despite successful GitHub Actions**
+**Frontend port configuration fixed - container was failing on port 8080**
 
-## 🛠️ New Fix in Progress:
-- **Issue**: Previous fix with `serve` dependency didn't work
-- **New Solution**: Using Express.js server to serve React static files
-- **Status**: GitHub Actions Run #6 starting
-- **Expected Time**: 2-3 minutes
+## 🛠️ New Fix Applied:
+- **Root Cause**: Express server was listening on port 3000, Azure expects 8080
+- **Fix**: Changed `process.env.PORT || 3000` to `process.env.PORT || 8080`  
+- **Additional Fix**: Added binding to `0.0.0.0` for proper container networking
+- **Status**: GitHub Actions deployment in progress
+
+### 🔍 What We Found in Azure Logs:
+```
+ERROR - Container didn't respond to HTTP pings on port: 8080
+ERROR - Container has exited, failing site start
+```
+
+### 🎯 Solution Applied:
+1. ❌ **Previous**: `const port = process.env.PORT || 3000`
+2. ✅ **New**: `const port = process.env.PORT || 8080`  
+3. 🔧 **Additional**: `app.listen(port, "0.0.0.0", ...)`
 
 ### 🌐 Application URLs:
 - **Frontend (Being Fixed)**: https://azure-crud-frontend-app.azurewebsites.net ⚠️
