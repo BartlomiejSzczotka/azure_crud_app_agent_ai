@@ -191,3 +191,4 @@ The deployment creates:
 | `DEPLOYMENT.md` | Detailed deployment guide |
 
 Azure CRUD application built with AI agent assistance
+
