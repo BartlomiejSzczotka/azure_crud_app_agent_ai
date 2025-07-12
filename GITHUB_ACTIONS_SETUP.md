@@ -157,12 +157,29 @@ az webapp config appsettings set --resource-group <rg> --name azure-crud-fronten
 3. App Service Plan utworzony: `azure-crud-plan`
 4. Backend App utworzony: `azure-crud-backend-app`
 5. Frontend App utworzony: `azure-crud-frontend-app`
+6. ✅ **GitHub Secrets dodane pomyślnie**
+7. ✅ **Deployment wykonany pomyślnie**
 
-### 📋 DO ZROBIENIA (PRZEZ CIEBIE):
-1. **Pobierz publish profiles** (Azure Portal lub CLI)
-2. **Dodaj GitHub secrets** (2 secrets z publish profiles)
-3. **Uruchom workflow** w GitHub Actions
-4. **Sprawdź deployment** na swoich URLs
+## 🎉 APLIKACJA JEST LIVE!
+
+### 🌐 Twoje URLs:
+- **Frontend (React App)**: https://azure-crud-frontend-app.azurewebsites.net
+- **Backend (API)**: https://azure-crud-backend-app.azurewebsites.net
+
+### 🚀 Jak otworzyć aplikację:
+1. **Kliknij na Frontend URL** powyżej lub wklej w przeglądarce
+2. **Lub użyj bezpośrednich linków**:
+   - Frontend: https://azure-crud-frontend-app.azurewebsites.net
+   - Backend API: https://azure-crud-backend-app.azurewebsites.net
+3. **Lub przez Azure Portal**:
+   - Idź na https://portal.azure.com
+   - Znajdź `azure-crud-rg` → `azure-crud-frontend-app`
+   - Kliknij "Browse" lub skopiuj URL
+
+### 📱 Testowanie aplikacji:
+- **Frontend** powinien pokazać Twoją React aplikację
+- **Backend** powinien odpowiadać na `/api` endpointy
+- Sprawdź czy wszystkie funkcje CRUD działają poprawnie
 
 ### 🔗 Przydatne linki:
 - **Azure Portal**: https://portal.azure.com (znajdź `azure-crud-rg`)
